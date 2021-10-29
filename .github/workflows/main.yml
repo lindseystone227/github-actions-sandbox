@@ -10,9 +10,6 @@ on:
   pull_request:
     branches: [ master ]
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -42,10 +39,13 @@ jobs:
        
       - run: node --version
       
-      - name: run tests
-        run: |
-          npm install
-          npm run test
+      - name: update readme file
+        run: node index.js
      
-
-
+      - name: commit the change
+        run: |
+        git config user.name "Alex"
+        git config user.email "alex@macarthur.com"
+        git add README.md
+        git commit -m "Update README."
+        git push
